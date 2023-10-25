@@ -1,10 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import Title from './components/Title/Title.js'
+import InputBar from './components/InputBar/InputBar.js'
+import EncounterOutput from './components/EncounterOutput/EncounterOutput';
+
+// export const EncounterGeneratorContext = React.createContext();
 
 function App() {
+
+  // const [encounters, setEncounters] = useState([]);
+
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -17,7 +25,10 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
+      <Title />
+      <InputBar />
+      <EncounterOutput />
     </div>
   );
 }

@@ -1,0 +1,17 @@
+.text-input {
+    height: 44px;
+    margin: 5px;
+}
+
+.text-yes {
+    height: 150px;
+    transition: max-width 1s;
+}
+
+.button {
+    background-color: orange;
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+    vertical-align: top;
+}
