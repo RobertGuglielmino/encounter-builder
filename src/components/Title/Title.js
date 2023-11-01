@@ -31,7 +31,7 @@ function Title() {
     const [url, setUrl] = useState(null);
 
     useEffect(() => {
-        generateImage("A professionally drawn dnd battlemap of the nine hells")
+        //generateImage("A professionally drawn dnd battlemap of the nine hells")
         console.log("ETETET ");
     }, []);
 

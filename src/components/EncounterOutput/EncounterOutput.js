@@ -1,14 +1,15 @@
 import './EncounterOutput.css';
 
+import {
+    useEffect
+} from "react"; 
+
 import TextInput from './TextInput/TextInput';
 import Encounter from './Encounter/Encounter';
 import GeneratedImage from './GeneratedImage/GeneratedImage';
+import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
 
 function EncounterOutput() {
-
-    //const context = React.useContext(EncounterGeneratorContext);
-
-    //context.encounters
 
     const num = [
         {
@@ -24,7 +25,17 @@ function EncounterOutput() {
             datetime: "10/11/2023"
         }
     ];
-    const items = num
+
+    const { encounters } = useEncounterGeneratorContext();
+
+    console.log("========");
+    console.log("encounters in output " + JSON.stringify(encounters));
+    console.log(encounters.length);
+
+    var items = [];
+
+    useEffect(() => {
+        items = num
         .sort((a,b) => {
             return new Date(b.datetime).getDate() - new Date(a.datetime).getDate()
         })
@@ -39,6 +50,7 @@ function EncounterOutput() {
                     <GeneratedImage image={n.image}/>
                 </li>)
         });
+    }, [encounters])
 
     return (
         <div>
