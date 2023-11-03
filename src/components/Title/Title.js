@@ -1,3 +1,4 @@
+import { Heading, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 function Title() {
@@ -7,12 +8,12 @@ function Title() {
 
     return (
         <div className="Title">
-            <h1>
-                DND Encounter Builder
-            </h1>
-            <h3>
-                Type in an encounter idea, and this will generate it for u
-            </h3>
+            <Heading>
+                RPG Encounter Builder
+            </Heading>
+            <Text>
+                Type an encounter idea you have! This will generate an encounter and a battlemap for you.
+            </Text>
         </div>
     );
 }

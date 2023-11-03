@@ -6,17 +6,13 @@ import {
 
 import { FaSearch } from 'react-icons/fa';
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
-import { FormControl, FormLabel, Input, FormErrorMessage, IconButton, HStack } from '@chakra-ui/react';
+import { FormControl, FormLabel, Textarea, FormErrorMessage, IconButton, HStack, Spinner } from '@chakra-ui/react';
 
 function InputBar() {
-    const [inputClassName, setInputClassName] = useState("text-input");
     const [encounterInput, setEncounterInput] = useState(null);
     const [loading, setLoading] = useState(false);
     
-
     const {addEncounter} = useEncounterGeneratorContext();
-
-    const url = "https://static.wikia.nocookie.net/dino/images/4/45/JW_pteranodon.png/revision/latest/scale-to-width-down/1000?cb=20150407205351";
 
     const isEncounterInputEmpty = encounterInput === '';
 
@@ -26,44 +22,41 @@ function InputBar() {
                 <HStack>
                 <FormControl isError={isEncounterInputEmpty}>
                     <FormLabel></FormLabel>
-                    <Input
-                        className={inputClassName}
+                    <Textarea 
+                        variant="filled"
+                        marginLeft='auto'
                         placeholder="A professionally drawn dnd battlemap of the nine hells"
                         value={encounterInput}
+                        resize="horizontal"
                         onChange={e => setEncounterInput(e.target.value)}
-                        onKeyDown={setInputSize} />
-                    <FormErrorMessage></FormErrorMessage>
+                        />
+                    <FormErrorMessage>Don't leave me hangin' here! Type up something first!</FormErrorMessage>
                 </FormControl>
                 <IconButton
                     className="button"
-                    colorScheme='green'
+                    colorScheme={!loading ? "green" : "grey"}
+                    isDisabled={loading}
                     value="test"
-                    icon={<FaSearch />}
+                    icon={!loading ? <FaSearch /> : <Spinner/>}
                     onClick={buttonClick} />
                 </HStack>
             </form>
-            {loading && <div>THIS BITCH LOADING</div>}
         </div>
     )
 
-    function setInputSize(e) {
-        setInputClassName("text-yes");
-    }
-
     function buttonClick(e) {
-        setInputClassName("text-input");
-        //generateEncounter(encounterInput);
         generateImage(encounterInput);
     }
 
     
     async function generateImage(textInput) {
 
-        console.log(textInput);
-
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json'
+                // 'OPENAI_API_KEY': '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'
+            },
             body: JSON.stringify({ "test": textInput })
         };
 
@@ -74,42 +67,18 @@ function InputBar() {
         };
     
         try {
-            const pic = await fetch('https://vo5s8h7dpb.execute-api.us-east-2.amazonaws.com/dev', requestOptions)
+            setLoading(true);
+            const encounter = await fetch('https://vo5s8h7dpb.execute-api.us-east-2.amazonaws.com/dev', requestOptions)
             .then(response => response.json());
-        
-            console.log("wow");
-            console.log(pic);
 
-            console.log("test data " + JSON.stringify(teee));
-
-            return addEncounter(teee);
+            return addEncounter(encounter);
         } catch {
     
             return "https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg";
+        } finally {
+            setLoading(false);
         }
     }
-
-    // function generateEncounter(encounterText) {
-    //     useEffect(async () => {
-    //         try {
-    //             setLoading(true);
-
-    //             axios.post(url, {
-    //                 input: encounterText
-    //             })
-    //             .then(response => {
-    //                 setEncounters(response.data)
-    //             })
-
-    //             setLoading(false);
-
-    //         } catch {
-    //             setLoading(false);
-    //             console.error(error);
-    //             //TODO ERROR HANDLING
-    //         }
-    //     }, [])
-    // }
 }
 
 export default InputBar;

@@ -17,7 +17,7 @@ function App() {
       <EncounterGeneratorProvider>
         <div className="App">
           <Title />
-          <InputBar />
+          {/* <InputBar /> */}
           <EncounterOutput />
         </div>
       </EncounterGeneratorProvider>

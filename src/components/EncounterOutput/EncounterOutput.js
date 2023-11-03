@@ -3,6 +3,7 @@ import './EncounterOutput.css';
 import {
     useEffect
 } from "react"; 
+import InputBar from "../InputBar/InputBar"
 import { Card, Heading, Text, Image, CardHeader, VStack, CardBody, CardFooter } from '@chakra-ui/react'
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
 import { Divider } from '@chakra-ui/react';
@@ -28,7 +29,6 @@ function EncounterOutput() {
 
     console.log("========");
     console.log("encounters in output " + JSON.stringify(encounters));
-    console.log(encounters.length);
 
     var items = encounters
         .sort((a,b) => {
@@ -43,26 +43,26 @@ function EncounterOutput() {
                     size="lg"
                 >
                     <CardHeader>
-                        <Heading>{n.title}</Heading>
+                        <Heading fontSize='2xl'>{n.title}</Heading>
                     </CardHeader>
-                        <Text>{n.encounter}</Text>
-                        <Divider />
+                        <Text fontSize='lg' marginBottom="30px">{n.description}</Text>
+                        <Divider color="lightGray"/>
                     <CardFooter>
                         <Image
-                            src="https://i.pinimg.com/564x/cc/62/f3/cc62f3380e77b62f50b080d9a8bd1e40.jpg"
+                            src={n.image}
                         />
                     </CardFooter>
                 </Card>
             )
         });
 
-    console.log("qwer " + items);
-
     return (
         <div>
             <VStack
                 className="encounter-output"
                 spacing="40px">
+                    
+                <InputBar />
                 {items}
             </VStack>
         </div>
