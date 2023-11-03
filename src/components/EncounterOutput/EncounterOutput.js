@@ -3,11 +3,9 @@ import './EncounterOutput.css';
 import {
     useEffect
 } from "react"; 
-
-import TextInput from './TextInput/TextInput';
-import Encounter from './Encounter/Encounter';
-import GeneratedImage from './GeneratedImage/GeneratedImage';
+import { Card, Heading, Text, Image, CardHeader, VStack, CardBody, CardFooter } from '@chakra-ui/react'
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
+import { Divider } from '@chakra-ui/react';
 
 function EncounterOutput() {
 
@@ -32,31 +30,41 @@ function EncounterOutput() {
     console.log("encounters in output " + JSON.stringify(encounters));
     console.log(encounters.length);
 
-    var items = [];
-
-    useEffect(() => {
-        items = num
+    var items = encounters
         .sort((a,b) => {
             return new Date(b.datetime).getDate() - new Date(a.datetime).getDate()
         })
         .map(n => {
             return (
-                <li
-                    key={n.title}
+                <Card
+                    // key={n.title}
                     className="encounter-item"
+                    colorScheme='orange'
+                    size="lg"
                 >
-                    <TextInput title={n.title}/>
-                    <Encounter encounter={n.encounter}/>
-                    <GeneratedImage image={n.image}/>
-                </li>)
+                    <CardHeader>
+                        <Heading>{n.title}</Heading>
+                    </CardHeader>
+                        <Text>{n.encounter}</Text>
+                        <Divider />
+                    <CardFooter>
+                        <Image
+                            src="https://i.pinimg.com/564x/cc/62/f3/cc62f3380e77b62f50b080d9a8bd1e40.jpg"
+                        />
+                    </CardFooter>
+                </Card>
+            )
         });
-    }, [encounters])
+
+    console.log("qwer " + items);
 
     return (
         <div>
-            <ul className="encounter-output">
+            <VStack
+                className="encounter-output"
+                spacing="40px">
                 {items}
-            </ul>
+            </VStack>
         </div>
     );
 }

@@ -4,35 +4,44 @@ import {
     useState
 } from "react"; 
 
+import { FaSearch } from 'react-icons/fa';
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
+import { FormControl, FormLabel, Input, FormErrorMessage, IconButton, HStack } from '@chakra-ui/react';
 
 function InputBar() {
     const [inputClassName, setInputClassName] = useState("text-input");
     const [encounterInput, setEncounterInput] = useState(null);
     const [loading, setLoading] = useState(false);
     
-    const {addEncounterState} = useEncounterGeneratorContext();
+
+    const {addEncounter} = useEncounterGeneratorContext();
 
     const url = "https://static.wikia.nocookie.net/dino/images/4/45/JW_pteranodon.png/revision/latest/scale-to-width-down/1000?cb=20150407205351";
 
+    const isEncounterInputEmpty = encounterInput === '';
 
     return (
         <div>
-            <input
-                className={inputClassName}
-                placeholder="A professionally drawn dnd battlemap of the nine hells"
-                value={encounterInput}
-                onChange={e => setEncounterInput(e.target.value)}
-                onKeyDown={setInputSize}
-            />
-            <button 
-                className="button"
-                value="test"
-                onClick={buttonClick}
-            >
-            yes
-            {/* <img src="https://i.pinimg.com/564x/cc/62/f3/cc62f3380e77b62f50b080d9a8bd1e40.jpg"></img> */}
-            </button>
+            <form>
+                <HStack>
+                <FormControl isError={isEncounterInputEmpty}>
+                    <FormLabel></FormLabel>
+                    <Input
+                        className={inputClassName}
+                        placeholder="A professionally drawn dnd battlemap of the nine hells"
+                        value={encounterInput}
+                        onChange={e => setEncounterInput(e.target.value)}
+                        onKeyDown={setInputSize} />
+                    <FormErrorMessage></FormErrorMessage>
+                </FormControl>
+                <IconButton
+                    className="button"
+                    colorScheme='green'
+                    value="test"
+                    icon={<FaSearch />}
+                    onClick={buttonClick} />
+                </HStack>
+            </form>
             {loading && <div>THIS BITCH LOADING</div>}
         </div>
     )
@@ -61,8 +70,7 @@ function InputBar() {
         const teee = {
             title: "hello1",
             encounter: "dragon",
-            image: "https://static.wikia.nocookie.net/dino/images/4/45/JW_pteranodon.png/revision/latest/scale-to-width-down/1000?cb=20150407205351",
-            datetime: "10/10/2023"
+            image: "https://static.wikia.nocookie.net/dino/images/4/45/JW_pteranodon.png/revision/latest/scale-to-width-down/1000?cb=20150407205351"
         };
     
         try {
@@ -72,9 +80,9 @@ function InputBar() {
             console.log("wow");
             console.log(pic);
 
-            console.log("test data " + JSON.stringify(teee))
+            console.log("test data " + JSON.stringify(teee));
 
-            return addEncounterState(teee);
+            return addEncounter(teee);
         } catch {
     
             return "https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg";
