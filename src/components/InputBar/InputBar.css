@@ -15,3 +15,7 @@
     margin: 5px;
     vertical-align: top;
 }
+
+.serif-font {
+    font-family: 'Lora', serif;
+}

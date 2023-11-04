@@ -7,8 +7,8 @@ function Title() {
     }, []);
 
     return (
-        <div className="Title">
-            <Heading>
+        <div className="Title sans-font">
+            <Heading className="sans-font">
                 RPG Encounter Builder
             </Heading>
             <Text>

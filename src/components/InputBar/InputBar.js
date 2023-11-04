@@ -16,6 +16,8 @@ function InputBar() {
 
     const isEncounterInputEmpty = encounterInput === '';
 
+    //"A professionally drawn dnd battlemap of the nine hells"
+
     return (
         <div>
             <form>
@@ -23,9 +25,10 @@ function InputBar() {
                 <FormControl isError={isEncounterInputEmpty}>
                     <FormLabel></FormLabel>
                     <Textarea 
+                        class="serif-font"
                         variant="filled"
                         marginLeft='auto'
-                        placeholder="A professionally drawn dnd battlemap of the nine hells"
+                        placeholder="Try something like 'A hard dnd 5e encounter for four 5th level plays in a mountain pass'" 
                         value={encounterInput}
                         resize="horizontal"
                         onChange={e => setEncounterInput(e.target.value)}
@@ -55,7 +58,6 @@ function InputBar() {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json'
-                // 'OPENAI_API_KEY': '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'
             },
             body: JSON.stringify({ "test": textInput })
         };
