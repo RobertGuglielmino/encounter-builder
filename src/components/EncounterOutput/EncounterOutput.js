@@ -10,32 +10,13 @@ import { Divider } from '@chakra-ui/react';
 
 function EncounterOutput() {
 
-    const num = [
-        {
-            title: "hello1",
-            encounter: "dragon",
-            image: "https://static.wikia.nocookie.net/dino/images/4/45/JW_pteranodon.png/revision/latest/scale-to-width-down/1000?cb=20150407205351",
-            datetime: "10/10/2023"
-        },
-        {
-            title: "hello2",
-            encounter: "2 dragons",
-            image: "https://static.wikia.nocookie.net/dino/images/4/45/JW_pteranodon.png/revision/latest/scale-to-width-down/1000?cb=20150407205351",
-            datetime: "10/11/2023"
-        }
-    ];
-
     const { encounters } = useEncounterGeneratorContext();
-
-    console.log("========");
-    console.log("encounters in output " + JSON.stringify(encounters));
 
     var items = encounters
         .sort((a,b) => {
             return new Date(a.datetime).getDate() - new Date(b.datetime).getDate()
         })
         .map(n => {
-            console.log("SPOOKY" + n.image);
             return (
                 <Card
                     // key={n.title}

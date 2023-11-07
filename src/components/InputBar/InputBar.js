@@ -9,7 +9,8 @@ import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
 import { FormControl, FormLabel, Textarea, FormErrorMessage, IconButton, HStack, Spinner } from '@chakra-ui/react';
 
 function InputBar() {
-    const [encounterInput, setEncounterInput] = useState(null);
+    const [encounterInput, setEncounterInput] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
     
     const {addEncounter} = useEncounterGeneratorContext();
@@ -22,18 +23,20 @@ function InputBar() {
         <div>
             <form>
                 <HStack>
-                <FormControl isError={isEncounterInputEmpty}>
+                <FormControl isInvalid={isEncounterInputEmpty && isSubmitted}>
                     <FormLabel></FormLabel>
                     <Textarea 
-                        class="serif-font"
+                        className="serif-font"
                         variant="filled"
                         marginLeft='auto'
                         placeholder="Try something like 'A hard dnd 5e encounter for four 5th level plays in a mountain pass'" 
+                        padding="5px"
                         value={encounterInput}
-                        resize="horizontal"
+                        size="50"
+                        resize="none"
                         onChange={e => setEncounterInput(e.target.value)}
                         />
-                    <FormErrorMessage>Don't leave me hangin' here! Type up something first!</FormErrorMessage>
+                    <FormErrorMessage className="sans-font">Don't leave me hangin' here! Type up something first!</FormErrorMessage>
                 </FormControl>
                 <IconButton
                     className="button"
@@ -48,6 +51,7 @@ function InputBar() {
     )
 
     function buttonClick(e) {
+        setIsSubmitted(true);
         generateImage(encounterInput);
     }
 

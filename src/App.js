@@ -5,6 +5,7 @@ import InputBar from './components/InputBar/InputBar.js'
 import { EncounterGeneratorProvider } from './components/encounterGeneratorContext'
 import EncounterOutput from './components/EncounterOutput/EncounterOutput';
 import { useEffect } from 'react';
+import theme from './theme.fonts'
 
 function App() {
 
