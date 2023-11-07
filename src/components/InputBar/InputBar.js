@@ -59,15 +59,9 @@ function InputBar() {
             headers: { 
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "test": textInput })
+            body: JSON.stringify({ "encounterDescription": textInput })
         };
 
-        const teee = {
-            title: "hello1",
-            encounter: "dragon",
-            image: "https://static.wikia.nocookie.net/dino/images/4/45/JW_pteranodon.png/revision/latest/scale-to-width-down/1000?cb=20150407205351"
-        };
-    
         try {
             setLoading(true);
             const encounter = await fetch('https://vo5s8h7dpb.execute-api.us-east-2.amazonaws.com/dev', requestOptions)
@@ -81,6 +75,10 @@ function InputBar() {
             setLoading(false);
         }
     }
+}
+
+function removeLastChar(input) {
+    return input.slice(0,-1);
 }
 
 export default InputBar;

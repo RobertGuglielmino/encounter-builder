@@ -32,9 +32,10 @@ function EncounterOutput() {
 
     var items = encounters
         .sort((a,b) => {
-            return new Date(b.datetime).getDate() - new Date(a.datetime).getDate()
+            return new Date(a.datetime).getDate() - new Date(b.datetime).getDate()
         })
         .map(n => {
+            console.log("SPOOKY" + n.image);
             return (
                 <Card
                     // key={n.title}
