@@ -6,7 +6,7 @@ import {
 
 import { FaSearch } from 'react-icons/fa';
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
-import { FormControl, FormLabel, Textarea, FormErrorMessage, IconButton, HStack, Spinner } from '@chakra-ui/react';
+import { FormControl, FormLabel, Textarea, FormErrorMessage, IconButton, HStack, Spinner, Box, FormHelperText } from '@chakra-ui/react';
 
 function InputBar() {
     const [encounterInput, setEncounterInput] = useState("");
@@ -20,7 +20,7 @@ function InputBar() {
     //"A professionally drawn dnd battlemap of the nine hells"
 
     return (
-        <div>
+        <Box>
             <form>
                 <HStack>
                 <FormControl isInvalid={isEncounterInputEmpty && isSubmitted}>
@@ -32,10 +32,13 @@ function InputBar() {
                         placeholder="Try something like 'A hard dnd 5e encounter for four 5th level plays in a mountain pass'" 
                         padding="5px"
                         value={encounterInput}
-                        size="50"
-                        resize="none"
+                        resize="horizontal"
+                        w={700}
                         onChange={e => setEncounterInput(e.target.value)}
                         />
+                    {loading ? 
+                        <FormHelperText className="sans-font">This request has a casting time of 2 rounds.</FormHelperText> :
+                        null }
                     <FormErrorMessage className="sans-font">Don't leave me hangin' here! Type up something first!</FormErrorMessage>
                 </FormControl>
                 <IconButton
@@ -47,12 +50,12 @@ function InputBar() {
                     onClick={buttonClick} />
                 </HStack>
             </form>
-        </div>
+        </Box>
     )
 
     function buttonClick(e) {
         setIsSubmitted(true);
-        generateImage(encounterInput);
+        if (!isEncounterInputEmpty) generateImage(encounterInput);
     }
 
     
@@ -70,6 +73,8 @@ function InputBar() {
             setLoading(true);
             const encounter = await fetch('https://vo5s8h7dpb.execute-api.us-east-2.amazonaws.com/dev', requestOptions)
             .then(response => response.json());
+
+            console.log(encounter);
 
             return addEncounter(encounter);
         } catch {

@@ -4,7 +4,7 @@ import {
     useEffect
 } from "react"; 
 import InputBar from "../InputBar/InputBar"
-import { Card, Heading, Text, Image, CardHeader, VStack, CardBody, CardFooter } from '@chakra-ui/react'
+import { Card, Heading, Text, Image, CardHeader, VStack, CardBody, CardFooter, Box, Center } from '@chakra-ui/react'
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
 import { Divider } from '@chakra-ui/react';
 
@@ -19,7 +19,7 @@ function EncounterOutput() {
         .map(n => {
             return (
                 <Card
-                    // key={n.title}
+                    //key={n.title}
                     className="encounter-item"
                     colorScheme='orange'
                     size="lg"
@@ -39,15 +39,17 @@ function EncounterOutput() {
         });
 
     return (
-        <div>
-            <VStack
-                className="encounter-output"
-                spacing="40px">
-                    
-                <InputBar />
-                {items}
-            </VStack>
-        </div>
+        <Center>
+            <Box boxSize="2xl">
+                <VStack
+                    className="encounter-output"
+                    spacing="40px">
+                        
+                    <InputBar />
+                    {items}
+                </VStack>
+            </Box>
+        </Center>
     );
 }
 
