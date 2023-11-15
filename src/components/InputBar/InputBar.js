@@ -43,7 +43,7 @@ function InputBar(props) {
                 </FormControl>
                 <IconButton
                     className="button"
-                    colorScheme={!props.loading ? "green" : "grey"}
+                    // colorScheme={!props.loading ? "green" : "grey"}
                     isDisabled={props.loading}
                     value="test"
                     icon={!props.loading ? <FaSearch /> : <Spinner/>}
