@@ -1,20 +1,23 @@
 import './EncounterOutput.css';
 
 import {
-    useEffect
+    useState
 } from "react"; 
 import InputBar from "../InputBar/InputBar"
+import EncounterSkeleton from '../EncounterSkeleton'
 import { Card, Heading, Text, Image, CardHeader, VStack, CardBody, CardFooter, Box, Center } from '@chakra-ui/react'
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
 import { Divider } from '@chakra-ui/react';
 
 function EncounterOutput() {
 
+    const [loading, setLoading] = useState(false);
+
     const { encounters } = useEncounterGeneratorContext();
 
     var items = encounters
         .sort((a,b) => {
-            return new Date(a.datetime).getDate() - new Date(b.datetime).getDate()
+            return new Date(b.time).getTime() - new Date(a.time).getTime()
         })
         .map(n => {
             return (
@@ -45,7 +48,11 @@ function EncounterOutput() {
                     className="encounter-output"
                     spacing="40px">
                         
-                    <InputBar />
+                    <InputBar 
+                        loading={loading}
+                        setLoading={setLoading}
+                    />
+                    {/* {loading ? <EncounterSkeleton/> : null } */}
                     {items}
                 </VStack>
             </Box>

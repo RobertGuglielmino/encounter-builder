@@ -5,13 +5,13 @@ import {
 } from "react"; 
 
 import { FaSearch } from 'react-icons/fa';
+import { getLoadingText } from '../../loadingText';
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
-import { FormControl, FormLabel, Textarea, FormErrorMessage, IconButton, HStack, Spinner, Box, FormHelperText } from '@chakra-ui/react';
+import { FormControl, FormLabel, Textarea, FormErrorMessage, IconButton, Button, HStack, Spinner, Box, FormHelperText } from '@chakra-ui/react';
 
-function InputBar() {
+function InputBar(props) {
     const [encounterInput, setEncounterInput] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [loading, setLoading] = useState(false);
     
     const {addEncounter} = useEncounterGeneratorContext();
 
@@ -36,17 +36,17 @@ function InputBar() {
                         w={700}
                         onChange={e => setEncounterInput(e.target.value)}
                         />
-                    {loading ? 
-                        <FormHelperText className="sans-font">This request has a casting time of 2 rounds.</FormHelperText> :
+                    {props.loading ? 
+                        <FormHelperText className="sans-font">{ getLoadingText() }</FormHelperText> :
                         null }
                     <FormErrorMessage className="sans-font">Don't leave me hangin' here! Type up something first!</FormErrorMessage>
                 </FormControl>
                 <IconButton
                     className="button"
-                    colorScheme={!loading ? "green" : "grey"}
-                    isDisabled={loading}
+                    colorScheme={!props.loading ? "green" : "grey"}
+                    isDisabled={props.loading}
                     value="test"
-                    icon={!loading ? <FaSearch /> : <Spinner/>}
+                    icon={!props.loading ? <FaSearch /> : <Spinner/>}
                     onClick={buttonClick} />
                 </HStack>
             </form>
@@ -70,7 +70,7 @@ function InputBar() {
         };
 
         try {
-            setLoading(true);
+            props.setLoading(true);
             const encounter = await fetch('https://vo5s8h7dpb.execute-api.us-east-2.amazonaws.com/dev', requestOptions)
             .then(response => response.json());
 
@@ -81,7 +81,7 @@ function InputBar() {
     
             return "https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg";
         } finally {
-            setLoading(false);
+            props.setLoading(false);
         }
     }
 }
