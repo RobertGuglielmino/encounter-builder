@@ -9,7 +9,7 @@ import { Card, Heading, Text, Image, CardHeader, VStack, CardBody, CardFooter, B
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
 import { Divider } from '@chakra-ui/react';
 
-function EncounterOutput() {
+function EncounterOutput(props) {
 
     const [loading, setLoading] = useState(false);
 
@@ -50,6 +50,7 @@ function EncounterOutput() {
                     spacing="40px">
                         
                     <InputBar 
+                        {...props}
                         loading={loading}
                         setLoading={setLoading}
                     />

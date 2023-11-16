@@ -1,11 +1,17 @@
 import './App.css';
-import { Button, Tabs, TabList, Tab, TabPanel, TabPanels } from '@chakra-ui/react'
+import { Button, Tabs, TabList, Tab, TabPanel, TabPanels, Switch } from '@chakra-ui/react'
 import Title from './components/Title/Title.js'
 import Info from './components/Info/Info.js';
 import { EncounterGeneratorProvider } from './components/encounterGeneratorContext'
 import EncounterOutput from './components/EncounterOutput/EncounterOutput';
+import EncounterPromptHelper from './components/EncounterPromptHelper/EncounterPromptHelper'
 import { useEffect } from 'react';
+import { ttrpgSystems } from './ttrpgSystems.js'
+import { encounterLocations } from './encounterLocations.js'
 
+import {
+  useState
+} from "react"; 
 
 /*
 TODO LIST:
@@ -15,10 +21,41 @@ TODO LIST:
  - accounts/hookup to database
  - encounter template
  - better info page
+   - how to use 
+ -
+ - last modified time
  - 
 */
 
 function App() {
+
+  const [showEncounterPromptHelper, setShowEncounterPromptHelper] = useState(false);
+
+
+  
+  const [ttrpgSystem, setTtrpgSystem] = useState(ttrpgSystems[0]);
+  const [level, setLevel] = useState(3);
+  const [numberOfPlayers, setNumberOfPlayers] = useState(4);
+  const [encounterLocation, setEncounterLocation] = useState(encounterLocations[0]);
+
+  const encounterPromptHelperPackage = {
+    ttrpgSystem,
+    setTtrpgSystem,
+    level,
+    setLevel,
+    numberOfPlayers,
+    setNumberOfPlayers,
+    encounterLocation,
+    setEncounterLocation,
+  }
+
+  const inputBarPackage = {
+    ttrpgSystem,
+    level,
+    numberOfPlayers,
+    encounterLocation,
+    showEncounterPromptHelper,
+  }
 
   useEffect(() => {
     document.title="RPG Encounter Generator";
@@ -34,8 +71,10 @@ function App() {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <Title /> 
-                <EncounterOutput />
+                <Title />
+                <Switch onChange={() => setShowEncounterPromptHelper(!showEncounterPromptHelper)}>Show Prompt Helper</Switch> 
+                { showEncounterPromptHelper ? <EncounterPromptHelper {...encounterPromptHelperPackage}/> : null }
+                <EncounterOutput {...inputBarPackage} />
               </TabPanel>
               <TabPanel>
                 <Info />

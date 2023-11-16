@@ -55,11 +55,21 @@ function InputBar(props) {
 
     function buttonClick(e) {
         setIsSubmitted(true);
-        if (!isEncounterInputEmpty) generateImage(encounterInput);
+        if (!isEncounterInputEmpty) generateEncounter();
     }
 
+    function generateAIPrompt() {
+        if (props.showEncounterPromptHelper) {
+            return "An encounter using the " + props.ttrpgSystem
+            + " system for " + props.numberOfPlayers + " level " + props.level
+            + " players, taking place in a " + props.encounterLocation
+            + " with the following additional details: " + encounterInput
+        } else return encounterInput;
+    }
     
-    async function generateImage(textInput) {
+    async function generateEncounter() {
+
+        const textInput = generateAIPrompt();
 
         const requestOptions = {
             method: 'POST',
