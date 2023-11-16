@@ -17,7 +17,8 @@ function EncounterOutput() {
 
     var items = encounters
         .sort((a,b) => {
-            return new Date(b.time).getTime() - new Date(a.time).getTime()
+            //sorts by date first, then by time
+            return new Date(a.date).getDate() - new Date(b.date).getDate() || new Date(a.time).getTime() - new Date(b.time).getTime()
         })
         .map(n => {
             return (
@@ -52,7 +53,7 @@ function EncounterOutput() {
                         loading={loading}
                         setLoading={setLoading}
                     />
-                    {/* {loading ? <EncounterSkeleton/> : null } */}
+                    {/* <EncounterSkeleton/> */}
                     {items}
                 </VStack>
             </Box>

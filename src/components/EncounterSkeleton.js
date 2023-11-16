@@ -3,7 +3,8 @@ import { Card, Skeleton, CardHeader, Divider, CardFooter } from "@chakra-ui/reac
 function EncounterSkeleton() {
 
     return (
-        <Card>
+        <Card 
+        size="lg">
             <CardHeader>
                 <Skeleton height='40px'/>
             </CardHeader>

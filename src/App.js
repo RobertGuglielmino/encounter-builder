@@ -6,6 +6,18 @@ import { EncounterGeneratorProvider } from './components/encounterGeneratorConte
 import EncounterOutput from './components/EncounterOutput/EncounterOutput';
 import { useEffect } from 'react';
 
+
+/*
+TODO LIST:
+
+ - make encounter skeleton work
+ - inputbar window scaling 
+ - accounts/hookup to database
+ - encounter template
+ - better info page
+ - 
+*/
+
 function App() {
 
   useEffect(() => {
