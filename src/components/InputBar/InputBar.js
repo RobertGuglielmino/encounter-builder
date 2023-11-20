@@ -20,7 +20,7 @@ function InputBar(props) {
     //"A professionally drawn dnd battlemap of the nine hells"
 
     return (
-        <Box>
+        <Box w={700}>
             <form>
                 <HStack>
                 <FormControl isInvalid={isEncounterInputEmpty && isSubmitted}>
@@ -32,8 +32,6 @@ function InputBar(props) {
                         placeholder="Try something like 'A hard dnd 5e encounter for four 5th level plays in a mountain pass'" 
                         padding="5px"
                         value={encounterInput}
-                        resize="horizontal"
-                        w={700}
                         onChange={e => setEncounterInput(e.target.value)}
                         />
                     {props.loading ? 

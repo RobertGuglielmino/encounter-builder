@@ -32,6 +32,7 @@ function EncounterOutput(props) {
                         <Heading fontSize='2xl'>{n.title}</Heading>
                     </CardHeader>
                         <Text fontSize='lg' marginBottom="30px">{n.description}</Text>
+                        <Text fontSize='lg' marginBottom="30px">{n.enemies}</Text>
                         <Divider color="lightGray"/>
                     <CardFooter>
                         <Image
