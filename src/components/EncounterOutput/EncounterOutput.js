@@ -46,15 +46,16 @@ function EncounterOutput(props) {
     return (
         <Center>
             <Box boxSize="2xl">
+                <InputBar 
+                    {...props}
+                    loading={loading}
+                    setLoading={setLoading}
+                />
                 <VStack
                     className="encounter-output"
-                    spacing="40px">
+                    spacing="40px"
+                    margin="40px">
                         
-                    <InputBar 
-                        {...props}
-                        loading={loading}
-                        setLoading={setLoading}
-                    />
                     {/* <EncounterSkeleton/> */}
                     {items}
                 </VStack>

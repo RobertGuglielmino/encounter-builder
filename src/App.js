@@ -1,5 +1,5 @@
 import './App.css';
-import { Button, Tabs, TabList, Tab, TabPanel, TabPanels, Switch } from '@chakra-ui/react'
+import { Button, Tabs, TabList, Tab, TabPanel, TabPanels, Switch, Textarea } from '@chakra-ui/react'
 import Title from './components/Title/Title.js'
 import Info from './components/Info/Info.js';
 import { EncounterGeneratorProvider } from './components/encounterGeneratorContext'
@@ -19,7 +19,7 @@ TODO LIST:
  - make encounter skeleton work
  - inputbar window scaling 
  - accounts/hookup to database
- - encounter template
+ - X encounter template
  - better info page
    - how to use 
  -
@@ -77,6 +77,7 @@ function App() {
                 <EncounterOutput {...inputBarPackage} />
               </TabPanel>
               <TabPanel>
+                <Textarea />
                 <Info />
               </TabPanel>
             </TabPanels>

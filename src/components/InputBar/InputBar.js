@@ -20,7 +20,7 @@ function InputBar(props) {
     //"A professionally drawn dnd battlemap of the nine hells"
 
     return (
-        <Box w={700}>
+        <Box>
             <form>
                 <HStack>
                 <FormControl isInvalid={isEncounterInputEmpty && isSubmitted}>
