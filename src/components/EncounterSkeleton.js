@@ -1,18 +1,16 @@
-import { Card, Skeleton, CardHeader, Divider, CardFooter } from "@chakra-ui/react";
+import { Card, Skeleton, CardHeader, Divider } from "@chakra-ui/react";
 
 function EncounterSkeleton() {
 
     return (
-        <Card 
-        size="lg">
+        <Card size="lg" w="100%">
             <CardHeader>
-                <Skeleton height='40px'/>
+                <Skeleton height='3em'/>
             </CardHeader>
-                <Skeleton height='200px'/>
-                <Divider color="lightGray"/>
-            <CardFooter>
-                <Skeleton height='200px'/>
-            </CardFooter>
+            <Skeleton height='8em'/>
+            <Skeleton height='2em' margin="30px"/>
+            <Divider color="lightGray"/>
+            <Skeleton height='200px' margin="30px"/>
         </Card>
     );
 }

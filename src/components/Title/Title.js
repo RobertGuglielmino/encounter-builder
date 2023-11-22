@@ -1,5 +1,5 @@
 import { Heading, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function Title() {
 

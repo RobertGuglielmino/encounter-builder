@@ -5,7 +5,7 @@ import {
 } from "react"; 
 import InputBar from "../InputBar/InputBar"
 import EncounterSkeleton from '../EncounterSkeleton'
-import { Card, Heading, Text, Image, CardHeader, VStack, CardBody, CardFooter, Box, Center } from '@chakra-ui/react'
+import { Card, Heading, Text, Image, CardHeader, VStack, CardFooter, Box, Center } from '@chakra-ui/react'
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
 import { Divider } from '@chakra-ui/react';
 
@@ -17,8 +17,8 @@ function EncounterOutput(props) {
 
     var items = encounters
         .sort((a,b) => {
-            //sorts by date first, then by time
-            return new Date(a.date).getDate() - new Date(b.date).getDate() || new Date(a.time).getTime() - new Date(b.time).getTime()
+            //sorts by date first, then by time  new Date(a.date).getDate() - new Date(b.date).getDate() ||
+            return  new Date(b.time).getTime() - new Date(a.time).getTime()
         })
         .map(n => {
             return (
@@ -35,9 +35,7 @@ function EncounterOutput(props) {
                         <Text fontSize='lg' marginBottom="30px">{n.enemies}</Text>
                         <Divider color="lightGray"/>
                     <CardFooter>
-                        <Image
-                            src={n.image}
-                        />
+                        <Image src={n.image}/>
                     </CardFooter>
                 </Card>
             )
@@ -56,7 +54,7 @@ function EncounterOutput(props) {
                     spacing="40px"
                     margin="40px">
                         
-                    {/* <EncounterSkeleton/> */}
+                    {loading && <EncounterSkeleton/>}
                     {items}
                 </VStack>
             </Box>

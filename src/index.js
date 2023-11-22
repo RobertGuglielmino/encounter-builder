@@ -4,13 +4,16 @@ import App from './App';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import theme from './theme.js'
 import reportWebVitals from './reportWebVitals';
+import { CookiesProvider } from "react-cookie";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode="dark" />
-      <App />
+      <CookiesProvider defaultSetOptions={{ path: '/' }}>
+        <ColorModeScript initialColorMode="dark" />
+        <App />
+      </CookiesProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

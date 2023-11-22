@@ -1,31 +1,33 @@
-import {
-    useState
-} from "react"; 
-import InputBar from "../InputBar/InputBar"
-import EncounterSkeleton from '../EncounterSkeleton'
+
 import { Radio, InputLeftAddon, Input, VStack, Box, Stack, HStack, RadioGroup, InputGroup, Center } from '@chakra-ui/react'
-import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
-import { Divider } from '@chakra-ui/react';
 import { ttrpgSystems } from "../../ttrpgSystems";
 import { encounterLocations } from "../../encounterLocations";
 
 function EncounterPromptHelper(props) {
+
+    const ttrpgSystemRadioOptions = ttrpgSystems
+    .map( (system) => {
+        return (
+            <Radio value={system}>{system}</Radio>
+        )
+    })
+
+    const encounterLocationRadioOptions = 
+    encounterLocations
+    .map( (system) => {
+        return (
+            <Radio value={system}>{system}</Radio>
+        )
+    })
 
 
     return (
         <Center>
             <Box>
                 <HStack>
-                    <RadioGroup onChange={props.setTtrpgSystem()} value={prompt.ttrpgSystem}>
+                    <RadioGroup onChange={props.setTtrpgSystem} value={props.ttrpgSystem}>
                         <Stack>
-                        {
-                            ttrpgSystems
-                            .map( (system) => {
-                                return (
-                                    <Radio value={system}>{system}</Radio>
-                                )
-                            })
-                        }
+                            { ttrpgSystemRadioOptions }
                         </Stack>
                     </RadioGroup>
                     <Box w={250}>
@@ -46,17 +48,9 @@ function EncounterPromptHelper(props) {
                             </InputGroup>
                         </VStack>
                     </Box>
-                    <RadioGroup onChange={props.setEncounterLocation()} value={prompt.encounterLocation}>
-                        <Stack direction='column'>
-                            {
-                                encounterLocations
-                                .map( (system) => {
-                                    return (
-                                        <Radio value={system}>{system}</Radio>
-                                    )
-                                })
-                            }
-                            {/* <Radio><Input></Input></Radio> */}
+                    <RadioGroup onChange={props.setEncounterLocation} value={props.encounterLocation}>
+                        <Stack>
+                            { encounterLocationRadioOptions }
                         </Stack>
                     </RadioGroup>
                 </HStack>

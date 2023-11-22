@@ -1,27 +1,43 @@
-import { Divider, Heading, Text } from '@chakra-ui/react'
+import { Center, Heading, Link, Text, VStack } from '@chakra-ui/react'
+import './Info.css';
 
 function Info() {
 
     return (
-        <div clavssName="sans-font">
-            <Heading>
-                Info
-            </Heading>
-            <Heading size="md">
-                About Me
-            </Heading>
-            <Text>
-                This is a project made by me, Robert Guglielmino, to learn React and web development.
-            </Text>
-            <Text>
-                I am currently looking for work, if you are interested, please email me at robert.guglielmino@gmail.com :)
-            </Text>
-            <Heading size="md">
-                Tech Stuff
-            </Heading>
-            <Text>
-                This uses AWS Amplify and AWS Lambda to host, and OpenAI to handle all the ai generation.
-            </Text>
+        <div className="sans-font">
+            <Center>
+                <VStack w={800}>
+                    <Heading className='sans-font'>
+                        Info
+                    </Heading>
+                    <Heading className='heading-subsection'>
+                        How to Use
+                    </Heading>
+                    <Text className='text-subsection'>
+                        Describe as much or as little of an RPG encounter as you would like!
+                        If you you want help, the Prompt Helper will give some structure to your request and help the AI Generate something good for you.
+                    </Text>
+                    <Heading className='heading-subsection'>
+                        About Me
+                    </Heading>
+                    <Text className='text-subsection'>
+                        This is a project made by me, Robert Guglielmino, to learn React and web development.
+                    </Text>
+                    <Text>
+                        I am currently looking for work, if you are interested, please email me at <Link color='teal.500' href="mailto: robert.guglielmino@gmail.com">robert.guglielmino@gmail.com</Link> :)
+                    </Text>
+                    <Heading className='heading-subsection'>
+                        Tech Stuff
+                    </Heading>
+                    <Text className='text-subsection'>
+                        This website uses cookies! If you regularly delete your cookies, some of the functionality of this website will be reduced.
+                    </Text>
+                    <Text className='text-subsection'>
+                        This uses AWS Amplify, Lambda, and API Gateway to host, and OpenAI to handle the text and image generation.
+                        The front end was build in React and Javascript. 
+                    </Text>
+                </VStack>
+            </Center>
         </div>
     );
 }

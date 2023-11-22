@@ -7,7 +7,7 @@ import {
 import { FaSearch } from 'react-icons/fa';
 import { getLoadingText } from '../../loadingText';
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
-import { FormControl, FormLabel, Textarea, FormErrorMessage, IconButton, Button, HStack, Spinner, Box, FormHelperText } from '@chakra-ui/react';
+import { FormControl, FormLabel, Textarea, FormErrorMessage, IconButton, HStack, Spinner, Box, FormHelperText } from '@chakra-ui/react';
 
 function InputBar(props) {
     const [encounterInput, setEncounterInput] = useState("");
@@ -34,9 +34,7 @@ function InputBar(props) {
                         value={encounterInput}
                         onChange={e => setEncounterInput(e.target.value)}
                         />
-                    {props.loading ? 
-                        <FormHelperText className="sans-font">{ getLoadingText() }</FormHelperText> :
-                        null }
+                    {props.loading && <FormHelperText className="sans-font">{ getLoadingText() }</FormHelperText> }
                     <FormErrorMessage className="sans-font">Don't leave me hangin' here! Type up something first!</FormErrorMessage>
                 </FormControl>
                 <IconButton
@@ -53,22 +51,13 @@ function InputBar(props) {
 
     function buttonClick(e) {
         setIsSubmitted(true);
+        setCookies();
         if (!isEncounterInputEmpty) generateEncounter();
-    }
-
-    function generateAIPrompt() {
-        if (props.showEncounterPromptHelper) {
-            return "An encounter using the " + props.ttrpgSystem
-            + " system for " + props.numberOfPlayers + " level " + props.level
-            + " players, taking place in a " + props.encounterLocation
-            + " with the following additional details: " + encounterInput
-        } else return encounterInput;
     }
     
     async function generateEncounter() {
 
         const textInput = generateAIPrompt();
-
         const requestOptions = {
             method: 'POST',
             headers: { 
@@ -92,10 +81,22 @@ function InputBar(props) {
             props.setLoading(false);
         }
     }
-}
 
-function removeLastChar(input) {
-    return input.slice(0,-1);
+    function generateAIPrompt() {
+        if (props.showEncounterPromptHelper) {
+            return "An encounter using the " + props.ttrpgSystem
+            + " system for " + props.numberOfPlayers + " level " + props.level
+            + " players, taking place in a " + props.encounterLocation
+            + " with the following additional details: " + encounterInput
+        } else return encounterInput;
+    }
+
+    function setCookies() {
+        props.setCookie('ttrpgSystem', props.ttrpgSystem, { path: "/", maxAge: 3600 });
+        props.setCookie('level', props.level, { path: "/", maxAge: 3600 });
+        props.setCookie('numberOfPlayers', props.numberOfPlayers, { path: "/", maxAge: 3600 });
+        props.setCookie('encounterLocation', props.encounterLocation, { path: "/", maxAge: 3600 });
+    }
 }
 
 export default InputBar;

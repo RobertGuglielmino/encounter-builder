@@ -13,7 +13,7 @@ export const EncounterGeneratorProvider = ({ children }) => {
       value={{
         encounters: encounterList,
         addEncounter: encounter => {
-            setEncounterList([...encounterList, encounter])
+            setEncounterList([encounter, ...encounterList])
         },
       }}
     >

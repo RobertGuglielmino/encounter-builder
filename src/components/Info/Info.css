@@ -1,4 +1,12 @@
+.heading-subsection {
+    size: m;
+    margin-top: 30px;
+    font-family: 'Quicksand', sans-serif;
+}
 
+.text-subsection {
+    font-family: 'Quicksand', sans-serif;
+}
 
 .serif-font {
     font-family: 'Lora', serif;
