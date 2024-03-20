@@ -1,7 +1,8 @@
-import { Center, Heading, Link, Text, VStack } from '@chakra-ui/react'
+import { Center, Heading, Link, Text, VStack, Button } from '@chakra-ui/react'
+import { deleteFromDB } from '../../dbClient.js';
 import './Info.css';
 
-function Info() {
+function Info(props) {
 
     return (
         <div className="sans-font">
@@ -34,8 +35,15 @@ function Info() {
                     </Text>
                     <Text className='text-subsection'>
                         This uses AWS Amplify, Lambda, and API Gateway to host, and OpenAI to handle the text and image generation.
-                        The front end was build in React and Javascript. 
+                        The front end was build in React and Javascript, using the Chakra UI Library. 
                     </Text>
+                    <Button
+                        //className="button"
+                        colorScheme="red"
+                        value="test"
+                        onClick={() => deleteFromDB(props.cookies.uuid)}>
+                        Remove Previous Entries
+                    </Button>
                 </VStack>
             </Center>
         </div>

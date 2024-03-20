@@ -8,12 +8,13 @@ import { FaSearch } from 'react-icons/fa';
 import { getLoadingText } from '../../loadingText';
 import { useEncounterGeneratorContext } from '../encounterGeneratorContext';
 import { FormControl, FormLabel, Textarea, FormErrorMessage, IconButton, HStack, Spinner, Box, FormHelperText } from '@chakra-ui/react';
+import { pushEncountersToDB } from '../../dbClient';
 
 function InputBar(props) {
     const [encounterInput, setEncounterInput] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     
-    const {addEncounter} = useEncounterGeneratorContext();
+    const {encounters, addEncounter} = useEncounterGeneratorContext();
 
     const isEncounterInputEmpty = encounterInput === '';
 
@@ -34,7 +35,7 @@ function InputBar(props) {
                         value={encounterInput}
                         onChange={e => setEncounterInput(e.target.value)}
                         />
-                    {props.loading && <FormHelperText className="sans-font">{ getLoadingText() }</FormHelperText> }
+                    { props.loading && <FormHelperText className="sans-font">{ getLoadingText() }</FormHelperText> }
                     <FormErrorMessage className="sans-font">Don't leave me hangin' here! Type up something first!</FormErrorMessage>
                 </FormControl>
                 <IconButton
@@ -73,15 +74,17 @@ function InputBar(props) {
 
             console.log(encounter);
 
-            return addEncounter(encounter);
-        } catch {
-    
-            return "https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg";
+            addEncounter(encounter);
+
+            return pushEncountersToDB(props.cookies.uuid, encounters);
+        } catch (e) {
+            
+            console.log(e);
         } finally {
             props.setLoading(false);
         }
     }
-
+    
     function generateAIPrompt() {
         if (props.showEncounterPromptHelper) {
             return "An encounter using the " + props.ttrpgSystem

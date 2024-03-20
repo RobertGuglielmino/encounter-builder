@@ -8,7 +8,7 @@ function EncounterPromptHelper(props) {
     const ttrpgSystemRadioOptions = ttrpgSystems
     .map( (system) => {
         return (
-            <Radio value={system}>{system}</Radio>
+            <Radio key={system} value={system}>{system}</Radio>
         )
     })
 
@@ -16,10 +16,9 @@ function EncounterPromptHelper(props) {
     encounterLocations
     .map( (system) => {
         return (
-            <Radio value={system}>{system}</Radio>
+            <Radio key={system} value={system}>{system}</Radio>
         )
     })
-
 
     return (
         <Center>
@@ -33,17 +32,17 @@ function EncounterPromptHelper(props) {
                     <Box w={250}>
                         <VStack spacing="20px">
                             <InputGroup>
-                                <InputLeftAddon children='Level' />
-                                <Input placeholder='3'
-                                    value={props.level}
-                                    onChange={e => props.setLevel(e.target.value)}
-                                />
-                            </InputGroup>
-                            <InputGroup>
                                 <InputLeftAddon children='# of Players' />          
                                 <Input placeholder='4'
                                     value={props.numberOfPlayers}
                                     onChange={e => props.setNumberOfPlayers(e.target.value)}
+                                />
+                            </InputGroup>
+                            <InputGroup>
+                                <InputLeftAddon children='Level' />
+                                <Input placeholder='3'
+                                    value={props.level}
+                                    onChange={e => props.setLevel(e.target.value)}
                                 />
                             </InputGroup>
                         </VStack>

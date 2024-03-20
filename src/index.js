@@ -5,14 +5,17 @@ import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import theme from './theme.js'
 import reportWebVitals from './reportWebVitals';
 import { CookiesProvider } from "react-cookie";
+import { EncounterGeneratorProvider } from './components/encounterGeneratorContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <CookiesProvider defaultSetOptions={{ path: '/' }}>
-        <ColorModeScript initialColorMode="dark" />
-        <App />
+        <EncounterGeneratorProvider>
+          <ColorModeScript initialColorMode="dark" />
+          <App />
+        </EncounterGeneratorProvider>
       </CookiesProvider>
     </ChakraProvider>
   </React.StrictMode>
